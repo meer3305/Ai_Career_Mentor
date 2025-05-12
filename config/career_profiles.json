@@ -1,0 +1,92 @@
+{
+  "Data Scientist": [
+    "python", "statistics", "machine learning", "data visualization", "sql", "pandas", "numpy", "deep learning"
+  ],
+  "Software Developer": [
+    "java", "python", "data structures", "algorithms", "git", "sql", "problem solving"
+  ],
+  "Full Stack Developer": [
+    "html", "css", "javascript", "react", "node.js", "express", "mongodb", "sql", "rest api"
+  ],
+  "Mobile App Developer": [
+    "flutter", "react native", "java", "kotlin", "android studio", "firebase", "ui/ux"
+  ],
+  "AI/ML Engineer": [
+    "python", "machine learning", "deep learning", "tensorflow", "pytorch", "nlp", "opencv"
+  ],
+  "Cybersecurity Analyst": [
+    "networking", "linux", "firewalls", "penetration testing", "wireshark", "python", "threat analysis"
+  ],
+  "DevOps Engineer": [
+    "linux", "docker", "kubernetes", "jenkins", "aws", "ci/cd", "terraform"
+  ],
+  "Cloud Architect": [
+    "aws", "azure", "google cloud", "cloud architecture", "docker", "kubernetes", "devops"
+  ],
+  "Game Developer": [
+    "c++", "unity", "unreal engine", "game design", "physics", "graphics programming"
+  ],
+  "UI/UX Designer": [
+    "figma", "adobe xd", "user research", "prototyping", "wireframing", "design thinking"
+  ],
+  "Digital Marketer": [
+    "seo", "sem", "google ads", "facebook ads", "email marketing", "analytics", "content writing"
+  ],
+  "Finance Analyst": [
+    "excel", "financial modeling", "accounting", "data analysis", "python", "sql", "statistics"
+  ],
+  "Chartered Accountant": [
+    "accounting", "taxation", "auditing", "laws", "excel", "financial reporting"
+  ],
+  "Doctor": [
+    "anatomy", "physiology", "diagnosis", "clinical skills", "pathology", "pharmacology"
+  ],
+  "Nurse": [
+    "clinical care", "medical terminology", "patient monitoring", "healthcare ethics"
+  ],
+  "Pharmacist": [
+    "pharmacology", "chemistry", "prescription analysis", "drug interactions", "patient counseling"
+  ],
+  "Psychologist": [
+    "counseling", "clinical psychology", "research", "mental health assessment", "communication"
+  ],
+  "Civil Engineer": [
+    "autocad", "staad pro", "construction", "surveying", "estimation", "project management"
+  ],
+  "Mechanical Engineer": [
+    "cad", "cam", "solidworks", "thermodynamics", "mechanics", "manufacturing"
+  ],
+  "Electrical Engineer": [
+    "circuit design", "matlab", "embedded systems", "microcontrollers", "power systems"
+  ],
+  "Lawyer": [
+    "legal research", "contract law", "court procedures", "writing skills", "communication"
+  ],
+  "Teacher": [
+    "pedagogy", "communication", "subject knowledge", "classroom management", "digital tools"
+  ],
+  "Journalist": [
+    "writing", "investigative skills", "research", "video editing", "interviewing", "fact-checking"
+  ],
+  "Entrepreneur": [
+    "business strategy", "leadership", "marketing", "financial planning", "risk management"
+  ],
+  "Product Manager": [
+    "product lifecycle", "user research", "agile", "project management", "business acumen", "roadmapping"
+  ],
+  "Business Analyst": [
+    "excel", "sql", "data visualization", "statistics", "communication", "requirement gathering"
+  ],
+  "Architect": [
+    "autocad", "revit", "design principles", "construction knowledge", "3d modeling"
+  ],
+  "Interior Designer": [
+    "3ds max", "sketchup", "space planning", "aesthetics", "color theory", "client communication"
+  ],
+  "Graphic Designer": [
+    "photoshop", "illustrator", "creativity", "typography", "layout", "branding"
+  ],
+  "Chef": [
+    "cooking", "food safety", "recipe development", "plating", "nutrition", "inventory management"
+  ]
+}
