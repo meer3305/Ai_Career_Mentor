@@ -21,7 +21,7 @@ def analyze_skill_gap(user_skills, desired_career, profiles):
 
 def recommend_courses(missing_skills):
     return {
-        skill: f"https://www.udemy.com/s/{skill.replace(' ', '-')}/"
+        skill: f"https://www.udemy.com/course/{skill.replace(' ', '-')}/"
         for skill in missing_skills
     }
 # This function generates course URLs based on missing skills.
