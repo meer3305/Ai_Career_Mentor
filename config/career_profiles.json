@@ -88,5 +88,34 @@
   ],
   "Chef": [
     "cooking", "food safety", "recipe development", "plating", "nutrition", "inventory management"
+  ],
+  "Data Analyst": [
+    "excel", "sql", "data visualization", "statistics", "python", "r"
+  ],
+  "Web Designer": [
+    "html", "css", "javascript", "responsive design", "ux/ui principles", "graphic design"
+  ],
+  "Content Writer": [
+    "writing", "research", "seo", "content strategy", "editing", "social media"
+  ],
+  "Sales Executive": [
+    "communication", "negotiation", "customer relationship", "sales strategy", "market research"
+  ],
+  "HR Manager": [
+    "recruitment", "employee relations", "performance management", "hr policies", "training and development"
+  ],
+  "Supply Chain Manager": [
+    "logistics", "inventory management", "procurement", "data analysis", "negotiation"
+  ],
+  "Project Manager": [
+    "project planning", "risk management", "communication", "leadership", "agile methodologies"
+  ],
+  "Research Scientist": [
+    "research methods", "data analysis", "laboratory skills", "scientific writing", "critical thinking"
+  ],
+  "Biotechnologist": [
+    "molecular biology", "genetics", "biochemistry", "lab techniques", "data analysis"
   ]
 }
+
+
