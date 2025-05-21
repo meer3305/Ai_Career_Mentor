@@ -1,6 +1,12 @@
 import streamlit as st
 import json
-import modules
+
+import sys
+import os
+
+# Add project root (AI_CAREER_MENTOR) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import modules.skill_gap_logic
 
 def main():

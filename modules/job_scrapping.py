@@ -49,9 +49,16 @@ class JobScraper:
                         view_link = job_card.select_one("a.view_detail_button")
                         link = view_link['href'] if view_link and 'href' in view_link.attrs else "/"
 
+                    # Fix: Use correct selector for internship title and company name
+                    title_elem = job_card.select_one("div.heading_4_5 a")
+                    title = title_elem.text.strip() if title_elem else "N/A"
+
+                    company_elem = job_card.select_one("a.link_display_like_text")
+                    company = company_elem.text.strip() if company_elem else "N/A"
+
                     jobs.append({
-                        "title": job_card.select_one(".profile").text.strip() if job_card.select_one(".profile") else "N/A",
-                        "company": job_card.select_one(".company_name a").text.strip() if job_card.select_one(".company_name a") else "N/A",
+                        "title": title,
+                        "company": company,
                         "location": job_card.select_one(".location_link").text.strip() if job_card.select_one(".location_link") else (location or "N/A"),
                         "link": "https://internshala.com" + link,
                         "stipend": job_card.select_one(".stipend").text.strip() if job_card.select_one(".stipend") else "N/A",

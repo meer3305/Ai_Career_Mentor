@@ -1,7 +1,15 @@
 import streamlit as st
 import pandas as pd
 import json
-from modules.job_scrapping import JobScraper # Assuming your class is in modules/job_scrapping.py
+import sys
+import os
+
+# Add project root (AI_CAREER_MENTOR) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from modules.job_scrapping import JobScraper
+
+
 
 def load_career_profiles(file_path="config/career_profiles.json"):
     """Loads career profiles and skills from a JSON file."""

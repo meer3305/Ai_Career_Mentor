@@ -1,110 +1,132 @@
+# modules/interview_simulator.py
+
 import os
+import sys
 import json
-from dotenv import load_dotenv
-import openai
-from groq import Groq
+import re
+import random
+import textwrap
+import traceback
 
-# Load environment
-load_dotenv()
+# Add project root (AI_CAREER_MENTOR) to sys.path for module imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-# GROQ API config
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-client = Groq(api_key=GROQ_API_KEY)
-openai.api_key = GROQ_API_KEY
-openai.api_base = "https://api.groq.com/openai/v1"
+from modules.groq_openai import client, MODEL  # Your Groq API client wrapper
 
-# Best model for structured Q&A
-GROQ_MODEL = "mixtral-8x7b-32768"
-LLAMA_MODEL = "llama3-8b-8192"
 
-# Load job roles from JSON
 def load_roles(path="config/job_roles.json"):
-    with open(path, "r") as f:
-        return json.load(f)
+    """Load job roles from JSON file or return defaults."""
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+            # Support roles key or direct list
+            return data.get("roles", data) if isinstance(data, dict) else data
+    except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
+        print(f"Error loading roles: {e}")
+        return ["Software Engineer", "Data Scientist", "Product Manager"]
 
-# --- 1. Generate MCQs (Groq Mixtral)
-def generate_mcqs(role, difficulty, count=3, keywords=None):
-    prompt = f"""
-Generate {count} MCQ interview questions for the role '{role}' with {difficulty.lower()} difficulty.
+
+
+import re  # make sure this is imported at the top of your file
+
+def generate_mcq_general(role, difficulty, keywords=None):
+    """Generate one multiple-choice question in structured dict form."""
+    prompt = f"""Generate one multiple-choice question for a Genearl Knowledge for {role} interview at {difficulty} level.
 Format:
-Q: <question>
-A. Option A
-B. Option B
-C. Option C
-D. Option D
-Answer: <Correct Option>
-Explanation: <Why it's correct>
-"""
-    if keywords:
-        prompt += f"\nFocus on topics: {', '.join(keywords)}."
-
-    response = openai.ChatCompletion.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
-    )
-    return response["choices"][0]["message"]["content"]
-
-# --- 2. Generate single MCQ (if needed individually)
-def generate_mcq(role, difficulty, keywords=None):
-    prompt = f"""Generate a {difficulty} MCQ interview question for the role '{role}'.
-Include 4 options and the correct answer. Format:
 Question: ...
 Options:
-A) ...
-B) ...
-C) ...
-D) ...
-Correct Answer: ...
+A. ...
+B. ...
+C. ...
+D. ...
+Answer: <Correct Option Letter>
+Explanation: ...
 """
     if keywords:
-        prompt += f"\nInclude keywords: {', '.join(keywords)}"
+        prompt += f"\nInclude: {', '.join(keywords)}"
 
-    response = openai.ChatCompletion.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response['choices'][0]['message']['content']
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        content = response.choices[0].message.content.strip()
 
-# --- 3. Fill-in-the-blank Question
-def generate_fill_in(role, difficulty):
-    prompt = f"""Create a single fill-in-the-blank type question for an interview for the role '{role}' at {difficulty.lower()} level."""
-    response = openai.ChatCompletion.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response["choices"][0]["message"]["content"]
+        question_match = re.search(r"Question:\s*(.*)", content)
+        options = re.findall(r"[A-D]\.\s*([^\n]+)", content)
+        answer_letter_match = re.search(r"Answer:\s*([A-D])", content)
+        explanation_match = re.search(r"Explanation:\s*(.*)", content, re.DOTALL)
 
-# --- 4. DSA/Logic Puzzle (Gamified)
-def generate_dsa_puzzle(role):
-    prompt = f"""
-You're an interviewer. Create an engaging, gamified DSA or logic question for a '{role}' candidate.
-Include at least 1 hint.
+        if not (question_match and options and answer_letter_match and explanation_match):
+            raise ValueError("Failed to parse MCQ response.")
+
+        question = question_match.group(1).strip()
+        answer_letter = answer_letter_match.group(1).strip()
+        explanation = explanation_match.group(1).strip()
+
+        correct_index = ord(answer_letter) - ord("A")
+        correct_answer = options[correct_index] if 0 <= correct_index < len(options) else None
+
+        return {
+            "question": question,
+            "options": options,
+            "correct_answer": correct_answer,
+            "explanation": explanation,
+        }
+    except Exception as e:
+        return {
+            "error": f"❌ Error generating MCQ: {e}",
+            "raw_response": content if 'content' in locals() else "No response"
+        }
+
+
+def generate_mcq_dsa(role, difficulty, keywords=None):
+    """Generate one multiple-choice question in structured dict form."""
+    prompt = f"""Generate one multiple-choice question for DSA/role Specialisation Knowledge based on role which is asked in for {role} interview at {difficulty} level.
 Format:
 Question: ...
-Hint: ...
+Options:
+A. ...
+B. ...
+C. ...
+D. ...
+Answer: <Correct Option Letter>
+Explanation: ...
 """
-    response = openai.ChatCompletion.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response["choices"][0]["message"]["content"]
+    if keywords:
+        prompt += f"\nInclude: {', '.join(keywords)}"
 
-# --- 5. Evaluate Answer (returns feedback + score)
-def evaluate_answer(answer, role, difficulty):
-    prompt = f"""You are a strict technical interviewer.
-Evaluate this candidate's answer for a '{role}' interview at '{difficulty}' level.
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        content = response.choices[0].message.content.strip()
 
-Answer: {answer}
+        question_match = re.search(r"Question:\s*(.*)", content)
+        options = re.findall(r"[A-D]\.\s*([^\n]+)", content)
+        answer_letter_match = re.search(r"Answer:\s*([A-D])", content)
+        explanation_match = re.search(r"Explanation:\s*(.*)", content, re.DOTALL)
 
-Return:
-1. Feedback (1-2 lines)
-2. Score out of 10
-"""
-    response = openai.ChatCompletion.create(
-        model=GROQ_MODEL,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.5
-    )
-    return response["choices"][0]["message"]["content"]
-# --- 6. Generate Question (for interview simulator)
+        if not (question_match and options and answer_letter_match and explanation_match):
+            raise ValueError("Failed to parse MCQ response.")
+
+        question = question_match.group(1).strip()
+        answer_letter = answer_letter_match.group(1).strip()
+        explanation = explanation_match.group(1).strip()
+
+        correct_index = ord(answer_letter) - ord("A")
+        correct_answer = options[correct_index] if 0 <= correct_index < len(options) else None
+
+        return {
+            "question": question,
+            "options": options,
+            "correct_answer": correct_answer,
+            "explanation": explanation,
+        }
+    except Exception as e:
+        return {
+            "error": f"❌ Error generating MCQ: {e}",
+            "raw_response": content if 'content' in locals() else "No response"
+        }
+
