@@ -31,7 +31,7 @@ import re  # make sure this is imported at the top of your file
 
 def generate_mcq_general(role, difficulty, keywords=None):
     """Generate one multiple-choice question in structured dict form."""
-    prompt = f"""Generate one multiple-choice question for a Genearl Knowledge for {role} interview at {difficulty} level.
+    prompt = f"""Generate one multiple-choice question for a General Knowledge for {role} interview at {difficulty} level. Don't repeat any questions. You can give different options for the same question.Make sure there is a varirety of questions. 
 Format:
 Question: ...
 Options:
@@ -82,7 +82,7 @@ Explanation: ...
 
 def generate_mcq_dsa(role, difficulty, keywords=None):
     """Generate one multiple-choice question in structured dict form."""
-    prompt = f"""Generate one multiple-choice question for DSA/role Specialisation Knowledge based on role which is asked in for {role} interview at {difficulty} level.
+    prompt = f"""Generate one multiple-choice question for DSA/Specialisation Knowledge based on role which is asked in for {role} interview at {difficulty} level. Don't repeat any questions. You can give different options for the same question.Make sure there is a varirety of questions. 
 Format:
 Question: ...
 Options:
