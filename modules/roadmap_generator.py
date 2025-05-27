@@ -1,4 +1,15 @@
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Debug: Print the loaded GROQ_API_KEY (masked for safety)
+groq_api_key = os.getenv("GROQ_API_KEY")
+if groq_api_key:
+    print(f"[DEBUG] GROQ_API_KEY loaded: {groq_api_key[:4]}...{'*' * (len(groq_api_key)-8)}...{groq_api_key[-4:]}")
+else:
+    print("[DEBUG] GROQ_API_KEY not found in environment variables.")
 
 def generate_roadmap(user_skills, desired_career, profiles, api_key=None):
     """

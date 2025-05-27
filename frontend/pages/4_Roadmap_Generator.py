@@ -81,7 +81,7 @@ def main():
         use_static = desired_career in roadmap_sh_slugs
 
         with st.spinner("Generating your personalized roadmap..."):
-            roadmap = generate_roadmap(user_skills, desired_career, career_profiles, api_key="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")
+            roadmap = generate_roadmap(user_skills, desired_career, career_profiles)
             st.markdown(roadmap)
             st.download_button(
                 label="📥 Download Roadmap (Markdown)",
