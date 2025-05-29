@@ -115,6 +115,12 @@
   ],
   "Biotechnologist": [
     "molecular biology", "genetics", "biochemistry", "lab techniques", "data analysis"
+  ],
+  "Electronics Engineer": [
+    "circuit design", "embedded systems", "signal processing", "microcontrollers", "power electronics"
+  ],
+  "Electronics and Communication Engineer": [
+    "communication systems", "signal processing", "circuit design", "embedded systems", "networking"
   ]
 }
 

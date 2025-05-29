@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
 import textstat
+import docx
 
 # Download necessary NLTK data
 try:

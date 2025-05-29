@@ -1,0 +1,185 @@
+{
+    "Data Scientist": {
+        "required_skills": ["python", "sql", "machine learning", "statistics", "data analysis", "pandas", "numpy"],
+        "preferred_education": ["computer science", "mathematics", "statistics", "engineering", "physics"],
+        "description": "Extracts insights from complex data using statistical and machine learning techniques.",
+        "salary_range": "$95,000 - $165,000",
+        "demand": "Very High"
+    },
+    "Software Engineer": {
+        "required_skills": ["programming", "algorithms", "data structures", "software development", "testing", "debugging"],
+        "preferred_education": ["computer science", "software engineering", "computer engineering"],
+        "description": "Designs, develops, and maintains software systems and applications.",
+        "salary_range": "$85,000 - $160,000",
+        "demand": "Very High"
+    },
+    "DevOps Engineer": {
+        "required_skills": ["cloud computing", "docker", "kubernetes", "ci/cd", "aws", "azure", "linux"],
+        "preferred_education": ["computer science", "information technology"],
+        "description": "Bridges development and operations to improve deployment and system reliability.",
+        "salary_range": "$100,000 - $180,000",
+        "demand": "High"
+    },
+    "UX/UI Designer": {
+        "required_skills": ["user research", "wireframing", "prototyping", "figma", "adobe xd", "usability testing"],
+        "preferred_education": ["design", "human-computer interaction", "psychology"],
+        "description": "Creates user-centered digital experiences through research and design.",
+        "salary_range": "$75,000 - $140,000",
+        "demand": "High"
+    },
+    "Data Engineer": {
+        "required_skills": ["python", "sql", "etl", "data pipelines", "apache spark", "hadoop"],
+        "preferred_education": ["computer science", "engineering", "information systems"],
+        "description": "Builds and maintains data infrastructure and pipelines for analytics.",
+        "salary_range": "$90,000 - $155,000",
+        "demand": "High"
+    },
+    "Cybersecurity Analyst": {
+        "required_skills": ["network security", "penetration testing", "incident response", "firewalls", "encryption"],
+        "preferred_education": ["cybersecurity", "information technology", "computer science"],
+        "description": "Protects systems and networks from cyber threats and attacks.",
+        "salary_range": "$80,000 - $150,000",
+        "demand": "Very High"
+    },
+    "Business Analyst": {
+        "required_skills": ["excel", "sql", "data analysis", "business intelligence", "reporting"],
+        "preferred_education": ["business administration", "economics", "statistics", "finance"],
+        "description": "Analyzes business data to inform decision-making and strategy.",
+        "salary_range": "$70,000 - $130,000",
+        "demand": "High"
+    },
+    "Cloud Architect": {
+        "required_skills": ["cloud platforms", "architecture design", "aws", "azure", "gcp", "networking"],
+        "preferred_education": ["computer science", "information technology", "engineering"],
+        "description": "Designs and manages cloud computing architecture and services.",
+        "salary_range": "$120,000 - $200,000",
+        "demand": "Very High"
+    },
+    "Product Manager": {
+        "required_skills": ["product strategy", "market research", "user experience", "agile methodologies", "stakeholder management"],
+        "preferred_education": ["business administration", "marketing", "engineering", "design"],
+        "description": "Manages the development and launch of products from conception to market.",
+        "salary_range": "$100,000 - $180,000",
+        "demand": "High"
+    },
+    "AI/ML Engineer": {
+        "required_skills": ["machine learning", "deep learning", "tensorflow", "pytorch", "python", "data modeling"],
+        "preferred_education": ["computer science", "artificial intelligence", "statistics"],
+        "description": "Develops algorithms and models to enable machines to learn from data.",
+        "salary_range": "$110,000 - $190,000",
+        "demand": "Very High"
+    },
+    "Web Developer": {
+        "required_skills": ["html", "css", "javascript", "react", "node.js", "express", "mongodb", "sql", "rest api"],
+        "preferred_education": ["computer science", "web development", "software engineering"],
+        "description": "Builds and maintains websites and web applications.",
+        "salary_range": "$85,000 - $160,000",
+        "demand": "Very High"
+    },
+    "Mobile App Developer": {
+        "required_skills": ["flutter", "react native", "java", "kotlin", "android studio", "firebase", "ui/ux"],
+        "preferred_education": ["computer science", "mobile development", "software engineering"],
+        "description": "Builds and maintains mobile applications for iOS and Android.",
+        "salary_range": "$90,000 - $170,000",
+        "demand": "High"
+    },
+    "Network Engineer": {
+        "required_skills": ["networking", "cisco", "juniper", "routing", "switching", "security"],
+        "preferred_education": ["computer science", "information technology", "engineering"],
+        "description": "Designs, installs, and maintains computer networks.",
+        "salary_range": "$80,000 - $150,000",
+        "demand": "High"
+    },
+    "Database Administrator": {
+        "required_skills": ["sql", "oracle", "mysql", "postgresql", "mongodb", "data warehousing"],
+        "preferred_education": ["computer science", "information technology", "engineering"],
+        "description": "Manages and optimizes databases to ensure data integrity and availability.",
+        "salary_range": "$85,000 - $155,000",
+        "demand": "High"
+    },
+    "System Administrator": {
+        "required_skills": ["linux", "windows server", "active directory", "powershell", "bash", "networking"],
+        "preferred_education": ["computer science", "information technology", "engineering"],
+        "description": "Manages and maintains computer systems and servers.",
+        "salary_range": "$80,000 - $150,000",
+        "demand": "High"
+    },
+    "Quality Assurance Engineer": {
+        "required_skills": ["testing", "automation", "selenium", "jmeter", "agile", "scrum"],
+        "preferred_education": ["computer science", "software engineering", "information technology"],
+        "description": "Ensures software quality through testing and defect prevention.",
+        "salary_range": "$85,000 - $160,000",
+        "demand": "High"
+    },
+    "Blockchain Developer": {
+        "required_skills": ["solidity", "ethereum", "smart contracts", "cryptography", "distributed systems"],
+        "preferred_education": ["computer science", "software engineering", "cryptography"],
+        "description": "Develops decentralized applications and smart contracts on blockchain platforms.",
+        "salary_range": "$100,000 - $180,000",
+        "demand": "High"
+    },
+    "Game Developer": {
+        "required_skills": ["c++", "unity", "unreal engine", "game design", "physics", "graphics programming"],
+        "preferred_education": ["computer science", "game design", "artificial intelligence"],
+        "description": "Creates video games and game engines.",
+        "salary_range": "$90,000 - $170,000",
+        "demand": "High"
+    },
+    "Digital Marketer": {
+        "required_skills": ["seo", "sem", "google ads", "facebook ads", "email marketing", "analytics", "content writing"],
+        "preferred_education": ["marketing", "business administration", "communications"],
+        "description": "Promotes products and services through digital channels.",
+        "salary_range": "$70,000 - $130,000",
+        "demand": "High"
+    },
+    "Ethical Hacker": {
+        "required_skills": ["penetration testing", "network security", "vulnerability assessment", "cybersecurity tools"],
+        "preferred_education": ["cybersecurity", "information technology", "computer science"],
+        "description": "Tests systems for vulnerabilities to improve security.",
+        "salary_range": "$90,000 - $160,000",
+        "demand": "Very High"
+    },
+    "Technical Writer": {
+        "required_skills": ["technical writing", "documentation", "content creation", "communication", "research"],
+        "preferred_education": ["english", "communications", "technical writing"],
+        "description": "Creates manuals, guides, and documentation for technical products.",
+        "salary_range": "$70,000 - $120,000",
+        "demand": "Moderate"
+    },
+    "Research Scientist": {
+        "required_skills": ["research methods", "data analysis", "laboratory skills", "scientific writing", "critical thinking"],
+        "preferred_education": ["science", "engineering", "mathematics"],
+        "description": "Conducts research and experiments to advance scientific knowledge.",
+        "salary_range": "$90,000 - $170,000",
+        "demand": "High"
+    },
+    "Robotics Engineer": {
+        "required_skills": ["robotics", "mechanical engineering", "electrical engineering", "programming", "automation"],
+        "preferred_education": ["robotics", "mechanical engineering", "electrical engineering"],
+        "description": "Designs and builds robots and robotic systems.",
+        "salary_range": "$100,000 - $180,000",
+        "demand": "High"
+    },
+    "AI Engineer": {
+        "required_skills": ["machine learning", "deep learning", "tensorflow", "pytorch", "python", "data modeling"],
+        "preferred_education": ["computer science", "artificial intelligence", "statistics"],
+        "description": "Develops algorithms and models to enable machines to learn from data.",
+        "salary_range": "$110,000 - $190,000",
+        "demand": "Very High"
+    },
+    "Cloud Engineer": {
+        "required_skills": ["cloud computing", "aws", "azure", "gcp", "cloud architecture", "networking"],
+        "preferred_education": ["computer science", "information technology", "engineering"],
+        "description": "Designs and manages cloud computing infrastructure and services.",
+        "salary_range": "$120,000 - $200,000",
+        "demand": "Very High"
+    },
+    "Web Designer": {
+        "required_skills": ["html", "css", "javascript", "responsive design", "ux/ui principles", "graphic design"],
+        "preferred_education": ["design", "web design", "computer science"],
+        "description": "Creates visually appealing and user-friendly websites.",
+        "salary_range": "$75,000 - $140,000",
+        "demand": "High"
+    }
+    
+}

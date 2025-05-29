@@ -28,6 +28,7 @@ class JobScraper:
         return self._filter_by_salary(jobs)
 
     def _fetch_internshala_jobs(self, query, location):
+    
         jobs = []
         try:
             for page in range(1, self.max_pages + 1):
@@ -49,25 +50,39 @@ class JobScraper:
                         view_link = job_card.select_one("a.view_detail_button")
                         link = view_link['href'] if view_link and 'href' in view_link.attrs else "/"
 
-                    # Fix: Use correct selector for internship title and company name
-                    title_elem = job_card.select_one("div.heading_4_5 a")
-                    title = title_elem.text.strip() if title_elem else "N/A"
+                    # ✅ Fix for job role/title
+                    title_elem = job_card.select_one("div.internship_header div.profile")
+                    title = title_elem.get_text(strip=True) if title_elem else "N/A"
 
-                    company_elem = job_card.select_one("a.link_display_like_text")
+                    # ✅ Company name
+                    company_elem = job_card.select_one("div.company_name a") or job_card.select_one("div.company_name")
                     company = company_elem.text.strip() if company_elem else "N/A"
+
+                    # ✅ Location
+                    location_elem = job_card.select_one(".location_link")
+                    location_text = location_elem.text.strip() if location_elem else (location or "N/A")
+
+                    # ✅ Stipend
+                    stipend_elem = job_card.select_one(".stipend")
+                    stipend = stipend_elem.text.strip() if stipend_elem else "N/A"
 
                     jobs.append({
                         "title": title,
                         "company": company,
-                        "location": job_card.select_one(".location_link").text.strip() if job_card.select_one(".location_link") else (location or "N/A"),
+                        "location": location_text,
                         "link": "https://internshala.com" + link,
-                        "stipend": job_card.select_one(".stipend").text.strip() if job_card.select_one(".stipend") else "N/A",
+                        "stipend": stipend,
                         "source": "Internshala"
                     })
+
                 self._random_delay()
+
         except Exception as e:
             logging.error(f"Internshala error: {e}", exc_info=True)
+
         return jobs
+
+
 
     def _fetch_linkedin_jobs(self, query, location):
         jobs = []

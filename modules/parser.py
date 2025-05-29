@@ -1,5 +1,6 @@
 import os
 import re
+import docx
 import string
 import PyPDF2
 from docx import Document
@@ -53,7 +54,7 @@ class ResumeParser:
             if len(text.strip()) < 100:
                 # Need to reset the file pointer to the beginning
                 file_object.seek(0)
-                text = extract_text(file_object)
+                text = pdfminer_extract_text(file_object)
             
             self.text = text
             return text

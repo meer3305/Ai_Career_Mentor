@@ -4,9 +4,6 @@ import os
 import sys
 import json
 import re
-import random
-import textwrap
-import traceback
 
 # Add project root (AI_CAREER_MENTOR) to sys.path for module imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
