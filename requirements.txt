@@ -18,3 +18,9 @@ typing-extensions>=4.5.0
 json>=2.0.9
 base64>=1.0.0
 bytesio>=1.0.0
+requests
+scikit-learn
+matplotlib
+joblib
+pdfplumber
+watchdog
