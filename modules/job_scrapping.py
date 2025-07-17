@@ -137,3 +137,16 @@ class JobScraper:
         return jobs
 
 
+    def _filter_by_salary(self, jobs):
+        if self.min_salary <= 0:
+            return jobs
+        filtered_jobs = []
+        for job in jobs:
+            salary = job.get("salary", "N/A")
+            if isinstance(salary, str) and salary.isdigit():
+                salary_value = int(salary)
+                if salary_value >= self.min_salary:
+                    filtered_jobs.append(job)
+            elif isinstance(salary, (int, float)) and salary >= self.min_salary:
+                filtered_jobs.append(job)
+        return filtered_jobs
