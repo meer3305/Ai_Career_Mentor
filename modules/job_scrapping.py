@@ -136,19 +136,4 @@ class JobScraper:
             logging.error(f"Remotive error: {e}", exc_info=True)
         return jobs
 
-    def _filter_by_salary(self, jobs):
-        if not self.min_salary:
-            return jobs
 
-        filtered = []
-        for job in jobs:
-            raw_salary = job.get("stipend") or job.get("salary")
-            if raw_salary == "N/A":
-                continue
-            try:
-                amount = int(''.join(filter(str.isdigit, raw_salary.split('/')[0])))
-                if amount >= self.min_salary:
-                    filtered.append(job)
-            except Exception:
-                continue
-        return filtered
