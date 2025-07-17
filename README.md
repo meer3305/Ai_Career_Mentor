@@ -35,7 +35,7 @@ It analyzes resumes, detects skill gaps, suggests ideal career paths, provides p
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/ai_career_mentor.git
+git clone https://github.com/meer3305/ai_career_mentor.git
 cd ai_career_mentor
 pip install -r requirements.txt
 streamlit run streamlit_app.py
