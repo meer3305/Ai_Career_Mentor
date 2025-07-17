@@ -37,7 +37,7 @@ def app():
     def main():
         """Main function to set up the Streamlit app."""
         st.set_page_config(
-            page_title="🧠 AI Interview Simulator",
+            page_title="🧠 Test your knowledge",
             layout="wide",
             initial_sidebar_state="expanded",
             page_icon="🎙️",
@@ -219,7 +219,7 @@ def app():
 
     # --- Sidebar ---
     with st.sidebar:
-        st.title("⚙️ Interview Settings")
+        st.title("⚙️ Settings")
         st.markdown("---")
 
         # Role or custom keyword selection
@@ -276,14 +276,14 @@ def app():
         """)
 
     # --- Main Content ---
-    st.title("🧠 AI-Powered Interview Simulator")
+    st.title("🧠 Time to Test Your Knowledge ")
     st.markdown("""
         <div style="background: linear-gradient(90deg, #000000, #6d28d9, #2563eb);
                     color: #fff; padding: 1.5rem; border-radius: 12px; 
                     margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
             <h2 style="color: #fff; margin-bottom: 0.5rem;">Practice Makes Perfect</h2>
             <p style="margin-bottom: 0; opacity: 0.9;">
-                Simulate real interview conditions and get instant feedback on your performance.
+                Get to know how good you are with your knowledge and get instant feedback on your performance.
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -293,7 +293,7 @@ def app():
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
             st.markdown("### Ready to test your skills?")
-            if st.button("🚀 Launch Interview", use_container_width=True, type="primary"):
+            if st.button("🚀 Launch Test", use_container_width=True, type="primary"):
                 st.session_state.interview_started = True
                 st.session_state.interview_complete = False
                 st.session_state.current_round = 1
@@ -461,7 +461,7 @@ def app():
 
     # --- Results Page ---
     elif st.session_state.interview_complete:
-        st.markdown("## 🎉 Interview Completed!")
+        st.markdown("## 🎉 Test Completed!")
         
         # Calculate scores
         total_score = sum(s for s in st.session_state.score_history if s is not None)
@@ -554,7 +554,7 @@ def app():
                         st.text(answer)
         
         with col2:
-            if st.button("🔄 Start New Interview", use_container_width=True):
+            if st.button("🔄 Start New Test", use_container_width=True):
                 for key in list(st.session_state.keys()):
                     del st.session_state[key]
                 st.rerun()

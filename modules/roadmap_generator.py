@@ -19,7 +19,6 @@ def generate_roadmap(user_skills, desired_career, profiles, api_key=None):
         "Blockchain Developer": "blockchain",
         "AI/ML Engineer": "ai-data-scientist",
         "Mobile App Developer": "mobile",
-        "Cloud Architect": "cloud",
         "Web Developer": "frontend",  # or "full-stack" if you prefer
         "Product Manager": "product-management",
         "Business Analyst": "business-analyst",

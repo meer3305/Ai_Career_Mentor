@@ -13,22 +13,58 @@ except ImportError:
     st.stop()
 
 def app():
-    # Set page config
-    # Set Streamlit page config (alternative to st.set_page_config)
+    # Set Streamlit theme using st.markdown (alternative to st.set_page_config)
     st.markdown(
         """
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Skill Gap Analyzer</title>
-        <link rel="icon" href="https://img.icons8.com/color/96/000000/learning.png">
+        <meta name="theme-color" content="#2E8B57">
         """,
         unsafe_allow_html=True
     )
+    
+    # Custom CSS for better styling
+    st.markdown("""
+    <style>
+    .stButton>button {
+        background-color: #2E8B57;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+    .stButton>button:hover {
+        background-color: #3CB371;
+        color: white;
+    }
+    .stProgress > div > div > div {
+        background-color: #2E8B57;
+    }
+    .stMarkdown h1 {
+        color: #2E8B57;
+    }
+    .stMarkdown h2 {
+        color: #2E8B57;
+    }
+    .stMarkdown h3 {
+        color: #2E8B57;
+    }
+    .css-1aumxhk {
+        background-color: #F0F2F6;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     # Sidebar branding
     with st.sidebar:
         st.image("https://img.icons8.com/color/96/000000/learning.png", width=80)
-        st.markdown("<h2 style='color:#4F8BF9;'>AI Career Mentor</h2>", unsafe_allow_html=True)
+        st.title("AI Career Mentor")
         st.markdown("---")
+        st.markdown("### Navigation")
+        st.markdown("- Skill Gap Analyzer")
+        st.markdown("- Career Explorer")
+        st.markdown("---")
+        st.markdown("### About")
+        st.markdown("This tool helps you identify the skills you need for your dream career.")
 
     # Load career profiles
     try:
@@ -44,8 +80,15 @@ def app():
         st.warning("No career profiles found. Please check your configuration.")
         st.stop()
 
+    # Main content
+    st.title("🔍 Skill Gap Analyzer")
+    st.markdown("""
+    Identify the gap between your current skills and those required for your dream career.
+    **Get personalized course recommendations to bridge the gap!**
+    """)
+
     # Main area for user input
-    st.markdown("## 📋 User Profile")
+    st.header("📋 User Profile")
 
     # Career selection
     st.subheader("Career Target")
@@ -57,11 +100,9 @@ def app():
 
     with st.expander("💡 See required skills for this career"):
         if desired_career in career_profiles:
-            st.write(f"Skills needed for **{desired_career}**:")
-            st.markdown(
-                "<ul>" + "".join([f"<li>{skill}</li>" for skill in career_profiles[desired_career]]) + "</ul>",
-                unsafe_allow_html=True
-            )
+            st.write(f"**Skills needed for {desired_career}:**")
+            for skill in career_profiles[desired_career]:
+                st.markdown(f"- {skill}")
         else:
             st.write("No skill data available for this career.")
 
@@ -107,18 +148,6 @@ def app():
         type="primary"
     )
 
-    # Main content
-    st.markdown(
-        "<h1 style='color:#4F8BF9;'>🔍 Skill Gap Analyzer</h1>",
-        unsafe_allow_html=True
-    )
-    st.markdown("""
-    <div style='font-size:18px; color:#fff;'>
-    Identify the gap between your current skills and those required for your dream career.<br>
-    <b>Get personalized course recommendations to bridge the gap!</b>
-    </div>
-    """, unsafe_allow_html=True)
-
     if analyze_button:
         if not user_skills:
             st.warning("Please enter or upload your skills to analyze")
@@ -131,15 +160,15 @@ def app():
         with st.spinner("Analyzing your skill gap..."):
             try:
                 result = modules.skill_gap_logic.analyze_skill_gap(user_skills, desired_career, career_profiles)
-                # Enhanced Results UI with improved text visibility (black text on light backgrounds)
-                tab1, tab2, tab3 = st.tabs([
-                    "📊 <span style='color:black;'>Summary</span>", 
-                    "✅ <span style='color:black;'>Matched Skills</span>", 
-                    "📚 <span style='color:black;'>Learning Plan</span>"
-                ])
+                
+                st.success("Analysis complete!")
+                st.balloons()
+                
+                tab1, tab2, tab3 = st.tabs(["📊 Summary", "✅ Matched Skills", "📚 Learning Plan"])
 
                 with tab1:
-                    st.markdown("<h3 style='color:black;'>Skill Gap Summary</h3>", unsafe_allow_html=True)
+                    st.header("Skill Gap Summary")
+                    
                     col1, col2, col3 = st.columns(3)
                     with col1:
                         st.metric("Total Required Skills", len(result["ideal_skills"]))
@@ -150,68 +179,41 @@ def app():
 
                     progress = len(result["matched_skills"]) / len(result["ideal_skills"]) if result["ideal_skills"] else 0
                     st.progress(progress)
-                    st.markdown(
-                        f"<span style='color:black;font-size:16px;'>You have <b>{progress:.0%}</b> of the required skills for <b>{desired_career}</b></span>",
-                        unsafe_allow_html=True
-                    )
+                    st.markdown(f"**You have {progress:.0%} of the required skills for {desired_career}**")
 
                     if result["missing_skills"]:
-                        st.markdown(
-                            f"<div style='color:#d84315; background:#fff3e0; padding:10px; border-radius:6px;'><b>🔍 Focus on:</b> {', '.join(result['missing_skills'][:3])}...</div>",
-                            unsafe_allow_html=True
-                        )
+                        st.warning(f"**Focus on:** {', '.join(result['missing_skills'][:3])}...")
                     else:
-                        st.markdown(
-                            "<div style='color:#388e3c; background:#e8f5e9; padding:10px; border-radius:6px;'><b>🎉 Congratulations! You have all the required skills!</b></div>",
-                            unsafe_allow_html=True
-                        )
+                        st.success("🎉 Congratulations! You have all the required skills!")
 
                     with st.expander("🔎 Detailed comparison"):
-                        st.markdown("<span style='color:black;'><b>All required skills:</b></span>", unsafe_allow_html=True)
-                        st.markdown(
-                            "<ul style='color:black;'>" + "".join([f"<li>{skill}</li>" for skill in result["ideal_skills"]]) + "</ul>",
-                            unsafe_allow_html=True
-                        )
+                        st.write("**All required skills:**")
+                        for skill in result["ideal_skills"]:
+                            st.markdown(f"- {skill}")
 
                 with tab2:
-                    st.markdown("<h3 style='color:black;'>Your Matched Skills</h3>", unsafe_allow_html=True)
+                    st.header("Your Matched Skills")
                     if result["matched_skills"]:
-                        st.markdown(
-                            f"<span style='color:black;'>You already have these <b>{len(result['matched_skills'])}</b> skills needed for <b>{desired_career}</b>:</span>",
-                            unsafe_allow_html=True
-                        )
-                        st.markdown(
-                            "<ul style='color:#388e3c;font-weight:bold;'>" +
-                            "".join([f"<li style='color:#388e3c;font-weight:bold;font-size:16px;'>{skill}</li>" for skill in result["matched_skills"]]) +
-                            "</ul>",
-                            unsafe_allow_html=True
-                        )
+                        st.write(f"You already have these {len(result['matched_skills'])} skills needed for {desired_career}:")
+                        for skill in result["matched_skills"]:
+                            st.success(f"✓ {skill}")
                     else:
-                        st.markdown(
-                            "<div style='color:#d84315; background:#fff3e0; padding:10px; border-radius:6px;'>No matching skills found. You'll need to learn everything from scratch.</div>",
-                            unsafe_allow_html=True
-                        )
+                        st.warning("No matching skills found. You'll need to learn everything from scratch.")
 
                 with tab3:
-                    st.markdown("<h3 style='color:black;'>Your Personalized Learning Plan</h3>", unsafe_allow_html=True)
+                    st.header("Your Personalized Learning Plan")
                     if result["missing_skills"]:
-                        st.markdown(
-                            f"<span style='color:black;'>Here are recommended resources to acquire the <b>{len(result['missing_skills'])}</b> missing skills:</span>",
-                            unsafe_allow_html=True
-                        )
+                        st.write(f"Here are recommended resources to acquire the {len(result['missing_skills'])} missing skills:")
+                        
                         for skill, url in result["course_suggestions"].items():
-                            st.markdown(f"""
-                            <div style="padding: 15px; margin-bottom: 15px; background-color: #f5f5f5; border-left: 4px solid #1976d2; color:black;">
-                                <h4 style="color:#1976d2;">📚 {skill}</h4>
-                                <p><a href="{url}" target="_blank" style="color:#1976d2;">Udemy Course Link</a></p>
-                                <p style="color:black;"><strong>Learning tips:</strong></p>
-                                <ul style="color:black;">
-                                    <li>Spend 1-2 hours daily practicing</li>
-                                    <li>Build a small project using this skill</li>
-                                    <li>Find a mentor or study group</li>
-                                </ul>
-                            </div>
-                            """, unsafe_allow_html=True)
+                            with st.container():
+                                st.subheader(f"📚 {skill}")
+                                st.markdown(f"[Udemy Course Link]({url})")
+                                st.write("**Learning tips:**")
+                                st.markdown("- Spend 1-2 hours daily practicing")
+                                st.markdown("- Build a small project using this skill")
+                                st.markdown("- Find a mentor or study group")
+                                st.markdown("---")
 
                         st.download_button(
                             label="📥 Download Learning Plan",
@@ -225,11 +227,7 @@ def app():
                             mime="application/json"
                         )
                     else:
-                        st.markdown(
-                            "<div style='color:#388e3c; background:#e8f5e9; padding:10px; border-radius:6px;'><b>No missing skills! You're ready for this career path.</b></div>",
-                            unsafe_allow_html=True
-                        )
-                        st.balloons()
+                        st.success("No missing skills! You're ready for this career path.")
 
             except Exception as e:
                 st.error(f"An error occurred during analysis: {str(e)}")
@@ -239,7 +237,8 @@ def app():
     with st.expander("🔍 Explore All Career Profiles"):
         selected_profile = st.selectbox(
             "Select a career to view details",
-            sorted(career_profiles.keys())
+            sorted(career_profiles.keys()),
+            key="career_explorer"
         )
         if selected_profile in career_profiles:
             st.write(f"### {selected_profile}")
@@ -249,6 +248,5 @@ def app():
             for i, skill in enumerate(skills):
                 cols[i % 3].write(f"- {skill}")
 
-# Ensure the app runs if this file is executed directly
 if __name__ == "__main__":
     app()

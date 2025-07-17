@@ -81,9 +81,9 @@ with st.sidebar:
         menu_title=None,
         options=["🏠 Home", "📄 Resume Analyzer", "🧠 Skill Gap Detector", 
                 "💬 Career Advisor", "🗺️ Roadmap Generator", 
-                "💼 Job Finder", "🎤 Interview Simulator"],
+                "💼 Job Finder", "🧠 Knowledge Check"],
         icons=["house", "file-text", "brain", "chat-left-text", "map", 
-               "briefcase", "mic"],
+               "briefcase", "brain"],
         default_index=0,
         styles={
             "container": {"padding": "0!important", "background-color": "#1a1a2e"},
@@ -115,7 +115,7 @@ if selected == "🏠 Home":
         - **💬 Career Advisor**: Personalized career guidance based on your profile
         - **🗺️ Roadmap Generator**: Create customized learning paths for career growth
         - **💼 Job Finder**: Discover relevant job opportunities with smart matching
-        - **🎤 Interview Simulator**: Practice interviews with AI-powered feedback
+        - **🧠 Knowledge Check**: Test your knowledge with AI-powered feedback
         
         <div style="margin-top: 30px; color: #4CC9F0; font-size: 14px;">
         Select a feature from the sidebar to get started on your career development journey!
@@ -158,5 +158,5 @@ elif selected == "🗺️ Roadmap Generator":
 elif selected == "💼 Job Finder":
     job_scraper.app()  
 
-elif selected == "🎤 Interview Simulator":
+elif selected == "🧠 Knowledge Check":
     interview_simulator.app()
